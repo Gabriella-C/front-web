@@ -3,24 +3,26 @@ import styled from 'styled-components';
 export const Container = styled.div`
   height: 50px;
   border-bottom: 2px solid #2dc7ff;
-
-  div{
+  position: absolute;
+  min-width: 100vw;
+  width: 100%;
+  div {
     display: flex;
     float: right;
     margin-right: 20px;
 
-    ul{
+    ul {
       margin-right: 50px;
       display: flex;
       justify-content: space-between;
       margin-top: 20px;
-      li{
+      li {
         font-weight: bold;
         padding: 5px;
-        color: rgba(0,0,0,0.7);
+        color: rgba(0, 0, 0, 0.7);
         transition: all 0.2s;
 
-        &:hover{
+        &:hover {
           color: #000;
         }
       }
@@ -32,16 +34,17 @@ export const Container = styled.div`
       height: 40px;
       margin-top: 5px;
       border-radius: 2px;
-      box-shadow: 2px 2px 2px solid rgba(0,0,0,0.5);
+      box-shadow: 2px 2px 2px solid rgba(0, 0, 0, 0.5);
       transition: all 0.2s;
       width: 120px;
 
-      &:hover{
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+      &:hover {
         border: 2px solid #2dc7ff;
         background: none;
         color: #2dc7ff;
         border-radius: 2px;
       }
-   }
+    }
   }
 `;
