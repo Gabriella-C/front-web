@@ -37,11 +37,12 @@ export const Container = styled.div`
       box-shadow: 2px 2px 2px solid rgba(0, 0, 0, 0.5);
       transition: all 0.2s;
       width: 120px;
+      font-weight: bold;
 
       box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
       &:hover {
         border: 2px solid #2dc7ff;
-        background: none;
+        background: #fff;
         color: #2dc7ff;
         border-radius: 2px;
       }
