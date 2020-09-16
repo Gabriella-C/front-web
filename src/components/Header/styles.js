@@ -19,11 +19,16 @@ export const Container = styled.div`
       li {
         font-weight: bold;
         padding: 5px;
-        color: rgba(0, 0, 0, 0.7);
-        transition: all 0.2s;
 
-        &:hover {
+
+        a{
+          color: rgba(0, 0, 0, 0.7);
+          transition: all 0.2s;
+          &:hover {
           color: #000;
+        }
+
+
         }
       }
     }
