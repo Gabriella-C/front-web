@@ -1,9 +1,8 @@
 import React from 'react';
 import { Container } from './styles';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 
 function Login() {
-
   const { register, handleSubmit, errors } = useForm();
 
   function onSubmit(data) {
@@ -28,7 +27,7 @@ function Login() {
           ref={register({
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "Insira um E-mail válido!",
+              message: 'Insira um E-mail válido!',
             },
           })}
         />

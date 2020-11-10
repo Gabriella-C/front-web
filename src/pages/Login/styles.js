@@ -5,22 +5,28 @@ export const Container = styled.div`
   background: url(${fundo}) no-repeat;
   background-size: 1350px 500px;
   min-height: 100vh; /* min de altura */
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   h2 {
-    padding-top: 246px;
+    padding-top: 24px;
     margin-bottom: 10px;
     border-bottom: 2px solid #2dc7ff;
     padding-bottom: 4px;
-    margin-left: 27px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
   form {
-    width: 100%; /* largura do box */
-    padding: 0 40%; /* padding à esquerda e à direita */
-    margin: 0 60px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 400px; /* largura do box */
     text-align: center;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    height: 250px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
     div {
       display: flex;
       width: 300px;
@@ -38,7 +44,8 @@ export const Container = styled.div`
       padding: 4px;
       padding-left: 10px;
       border-radius: 2px;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+      background: #f5f5f5;
     }
     button {
       background: #2dc7ff;
@@ -50,7 +57,6 @@ export const Container = styled.div`
       transition: all 0.2s;
       width: 120px;
       font-weight: bold;
-      margin-left: 36px;
 
       box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
       &:hover {
