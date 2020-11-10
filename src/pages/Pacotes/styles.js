@@ -12,17 +12,17 @@ export const Container = styled.div`
 
 export const Title = styled.div`
   padding-bottom: 20px;
-  width:20%;
+  width: 20%;
   text-align: center;
 
-  @media(min-width: 680px) {
+  @media (min-width: 680px) {
     margin-top: 80px;
   }
 
   div {
     height: 2px;
-    width:100%;
-    background-color:#2dc7ff;
+    width: 100%;
+    background-color: #2dc7ff;
   }
 `;
 
@@ -32,7 +32,7 @@ export const Box = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  @media(min-width: 810px) {
+  @media (min-width: 810px) {
     flex-direction: row;
     align-items: baseline;
   }
