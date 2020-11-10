@@ -14,10 +14,14 @@ function Header() {
           <li>
             <Link to="/Entregador">Entregador</Link>
           </li>
-          <li>Petshop</li>
+          <li>
+            <Link to="/Petshop">Petshop</Link>
+          </li>
         </ul>
 
-        <button>Entrar</button>
+        <button>
+          <Link to="/Controle">Entrar</Link>
+        </button>
       </div>
     </Container>
   );

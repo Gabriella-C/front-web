@@ -20,15 +20,12 @@ export const Container = styled.div`
         font-weight: bold;
         padding: 5px;
 
-
-        a{
+        a {
           color: rgba(0, 0, 0, 0.7);
           transition: all 0.2s;
           &:hover {
-          color: #000;
-        }
-
-
+            color: #000;
+          }
         }
       }
     }
@@ -50,6 +47,14 @@ export const Container = styled.div`
         background: #fff;
         color: #2dc7ff;
         border-radius: 2px;
+      }
+      a {
+        color: #fff;
+        width: 120px;
+        height: 40px;
+        &:hover {
+          color: #2dc7ff;
+        }
       }
     }
   }
