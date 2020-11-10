@@ -29,7 +29,7 @@ export const Container = styled.div`
     &:hover {
       border: 2px solid #2dc7ff;
       background: #fff;
-      color: 2dc7ff #;
+      color: #2dc7ff;
       border-radius: 2px;
     }
     a {
