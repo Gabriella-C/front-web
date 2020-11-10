@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Container } from './styles';
 
 function Header() {
+  const history = useHistory();
   return (
     <Container>
       <div>
@@ -14,10 +15,12 @@ function Header() {
           <li>
             <Link to="/Entregador">Entregador</Link>
           </li>
-          <li>Petshop</li>
+          <li>
+            <Link to="/PetShop">Petshop</Link>
+          </li>
         </ul>
 
-        <button>Entrar</button>
+        <button onClick={() => history.push('/Login')}>Entrar</button>
       </div>
     </Container>
   );
