@@ -5,12 +5,12 @@ export const data = [
       {
         nome: 'Ração Golden',
         descricao: 'para filhotes, sabor carne e arroz',
-        preco: 'R$ 119,00',
+        preco: 119.0,
       },
       {
         nome: 'Pote D`água',
         descricao: 'para cães adultos',
-        preco: 'R$ 14,30',
+        preco: 14.3,
       },
     ],
   },
@@ -20,12 +20,12 @@ export const data = [
       {
         nome: 'Ração Golden',
         descricao: 'para filhotes, sabor carne e arroz',
-        preco: 'R$ 119,00',
+        preco: 119.0,
       },
       {
         nome: 'Ração Premier',
         descricao: 'para cães adultos, sabor carne e bacon',
-        preco: 'R$ 145,00',
+        preco: 145.0,
       },
     ],
   },

@@ -23,7 +23,7 @@ export const Container = styled.div`
 export const ListaPedido = styled.ul`
   display: flex;
   flex-direction: column;
-  background: #f5f5f5;
+  background: #fff;
   border-radius: 4px;
   padding: 8px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
@@ -34,13 +34,36 @@ export const ListaPedido = styled.ul`
 
 export const ComponentePedido = styled.li`
   width: 100%;
-  height: 200px;
+  height: 50px;
+  padding: 30px;
   background: #eeee;
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 30px;
+
+  &:hover {
+    div {
+      border: 2px solid #2dc7ff;
+    }
+  }
+
+  h6 {
+    display: none;
+  }
+
+  div {
+    width: 50px;
+    height: 50px;
+    background: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px solid #f76abc;
+    transition: all 0.2s;
+  }
+
   strong {
     color: rgba(0, 0, 0, 0.8);
     font-size: 12px;
@@ -65,8 +88,7 @@ export const ComponentePedido = styled.li`
 
   a {
     font-size: 11px;
-    margin-right: 30px;
-    margin-top: 120px;
+    margin-top: 20px;
     color: #2dc7ff;
     transition: all 0.2s;
 

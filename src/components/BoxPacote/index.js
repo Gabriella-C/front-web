@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Vector from '../../assets/Vector.png';
 import { Container, Box, Conteudo, IconText } from './styles';
 
 function BoxPacote(props) {
+  const history = useHistory();
   return (
     <Container>
       <Box>
@@ -22,9 +23,7 @@ function BoxPacote(props) {
           })}
         </Conteudo>
       </Box>
-      <button>
-        <Link to="/Petshop"> Obter Plano</Link>
-      </button>
+      <button onClick={() => history.push('/PetShop')}>Obter Plano</button>
     </Container>
   );
 }

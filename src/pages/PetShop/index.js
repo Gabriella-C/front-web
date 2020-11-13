@@ -1,8 +1,10 @@
 import React from 'react';
 import { Container } from './styles';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
 function PetShop() {
+  const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
   function onSubmit(data) {
     if (
@@ -63,8 +65,9 @@ function PetShop() {
           placeholder="Confirmação de Senha"
           ref={register}
         />
-        {errors.email && <p>{errors.email.message}</p>};
-        <button type="submit">Cadastrar</button>
+        <button onClick={() => history.push('/Etapa2')} type="submit">
+          Cadastrar
+        </button>
       </form>
     </Container>
   );
