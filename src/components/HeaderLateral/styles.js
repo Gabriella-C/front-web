@@ -21,6 +21,7 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       transition: all 0.2s;
+
       h5 {
         margin-left: 10px;
         font-size: 18px;

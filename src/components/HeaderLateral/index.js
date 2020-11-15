@@ -19,20 +19,12 @@ function HeaderLateral() {
       </Badge>
       <ul>
         <li>
-          <CgWorkAlt color="#000" size={25} />
-          <h5>Serviços</h5>
+          <BsFileText color="#000" size={25} />
+          <h5>Pedidos</h5>
         </li>
         <li>
           <BsGraphUp color="#000" size={25} />
-          <h5>Análise de dados</h5>
-        </li>
-        <li>
-          <RiWalletLine color="#000" size={25} />
-          <h5>Carteira</h5>
-        </li>
-        <li>
-          <BsFileText color="#000" size={25} />
-          <h5>Pedidos</h5>
+          <h5>Análise de Dados</h5>
         </li>
       </ul>
     </Container>

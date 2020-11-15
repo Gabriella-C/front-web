@@ -9,6 +9,7 @@ import Pedido from './pages/Pedido';
 import Pacotes from './pages/Pacotes';
 import Login from './pages/Login';
 import Etapa2 from './pages/PetShop/Etapa2';
+import Detalhes from './pages/Detalhes';
 
 export default function Routes() {
   return (
@@ -21,6 +22,7 @@ export default function Routes() {
       <Route path="/Pacotes" component={Pacotes} />
       <Route path="/Login" component={Login} />
       <Route path="/Etapa2" component={Etapa2} />
+      <Route path="/Detalhes" component={Detalhes} />
     </Switch>
   );
 }
