@@ -1,17 +1,29 @@
 import React from 'react';
 import { Container } from './styles';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
 
   function onSubmit(data) {
-    if (data.email === 'tassi@teste.com' && data.senha === 'teste') {
-      alert('pode entrar');
-    } else if (data.email === '' || data.senha === '') {
+    if (data.email === '' || data.senha === '') {
       alert('Campos nulos');
     } else {
-      alert('Usuário ou senha inválida');
+      axios.post('http://localhost:3333/Login_Empresa', { 'Email': data.email, 'Pass': data.senha }).then(
+        response => {
+          if (response.data.Erro === 'Não localizado #115988' || response.data.Login_Status === 'invalido') {
+            alert('Usuário ou senha inválida!');
+          } else {
+            history.push({
+              pathname: '/Pedido',
+              state: { id: response.data[0].idempresa }
+            });
+          }
+        }
+      );
     }
   }
 

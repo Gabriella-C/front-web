@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
 import Vector from '../../assets/Vector.png';
 import { Container, Box, Conteudo, IconText } from './styles';
 
@@ -23,7 +22,12 @@ function BoxPacote(props) {
           })}
         </Conteudo>
       </Box>
-      <button onClick={() => history.push('/PetShop')}>Obter Plano</button>
+      <button onClick={() =>
+        history.push({
+          pathname: '/PetShop',
+          state: { plano_escolhido: props.type }
+        })
+      }>Obter Plano</button>
     </Container>
   );
 }

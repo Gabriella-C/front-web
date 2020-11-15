@@ -1,12 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import HeaderLateral from '../../components/HeaderLateral';
 import { formatPrice } from '../../util/format';
 import { Container, ListaPedido, ComponentePedido } from './styles';
-import { data } from '../../data/data';
+import axios from 'axios';
 
 function Pedido() {
+  const location = useLocation();
+  const [pedidos, setPedidos] = useState([]);
+
+
+  useEffect(() => {
+    let id = location.state.id;
+    let idempresa = 'idempresa = ' + id;
+    axios.post('http://localhost:3333/List_Pedidos', { 'id': idempresa })
+      .then(
+        response => {
+          setPedidos(response.data);
+        }
+      );
+  }, []);
+
+
   let total = 0;
   return (
     <>
@@ -15,15 +30,12 @@ function Pedido() {
         <h2>Pedidos</h2>
         <div>
           <ListaPedido>
-            {data.map((produto) => (
+            {pedidos.map(({ idpedido, total }) => (
               <ComponentePedido>
                 <div>
-                  <strong>{'#' + produto.id}</strong>
+                  <strong>{'#' + idpedido}</strong>
                 </div>
-                {produto.produtos.map((p) => {
-                  total = total + p.preco;
-                })}
-                <h5>Total: R$ {formatPrice(total)}</h5>
+                <h5>Total: {formatPrice(total)}</h5>
                 <h6>{(total = 0)}</h6>
                 <Link to="/detalhes">Mais Detalhes</Link>
               </ComponentePedido>
