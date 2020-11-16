@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from './styles';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 function PetShop() {
   const history = useHistory();
+  const location = useLocation();
+  const [plano, setPlano] = useState('');
+
+  useEffect(() => {
+    setPlano(location.state.plano_escolhido);
+  }, [location]);
+
   const { register, handleSubmit, errors } = useForm();
+
   function onSubmit(data) {
     if (
       data.nome === '' ||
@@ -18,7 +26,17 @@ function PetShop() {
     } else if (data.senha !== data.confirmsenha) {
       alert('Senhas diferentes');
     } else {
-      console.log(data);
+      history.push({
+        pathname: '/Etapa2',
+        state:
+        {
+          nome: data.nome,
+          cnpj: data.cnpj,
+          email: data.email,
+          senha: data.senha,
+          plano: plano
+        }
+      });
     }
   }
   return (
@@ -65,9 +83,8 @@ function PetShop() {
           placeholder="Confirmação de Senha"
           ref={register}
         />
-        <button onClick={() => history.push('/Etapa2')} type="submit">
-          Cadastrar
-        </button>
+        {errors.email && <p>{errors.email.message}</p>};
+        <button type="submit"> Cadastrar </button>
       </form>
     </Container>
   );
