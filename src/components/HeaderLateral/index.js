@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { BiMenu } from 'react-icons/bi';
+import { BiMenu, BiBone } from 'react-icons/bi';
 import { CgWorkAlt } from 'react-icons/cg';
 import { BsGraphUp, BsFileText } from 'react-icons/bs';
 import { RiWalletLine } from 'react-icons/ri';
@@ -25,6 +25,10 @@ function HeaderLateral() {
         <li>
           <BsGraphUp color="#000" size={25} />
           <h5>Análise de Dados</h5>
+        </li>
+        <li>
+          <BiBone color="#000" size={25} />
+          <h5>Produtos</h5>
         </li>
       </ul>
     </Container>

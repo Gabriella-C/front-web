@@ -5,7 +5,7 @@ export const Container = styled.div`
   background: url(${fundo}) no-repeat;
   background-size: 1350px 650px;
   min-height: 100vh; /* min de altura */
-
+  max-width: 100vw;
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -16,17 +16,19 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  margin-top: 30px;
+  margin-top: 300px;
   min-height: 80vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #eee;
+  background: #f5f5f5;
   border-radius: 4px;
-  padding: 10px;
-
+  padding: 20px;
   width: 80%;
+  margin-bottom: 20px;
+  transition: all 0.2s;
 
   button {
     background: #f76abc;
@@ -52,7 +54,7 @@ export const Content = styled.div`
     }
     width: 80%;
     padding: 10px;
-    background: rgba(0, 0, 0, 0.1);
+    background: #eee;
     border-radius: 4px;
     transition: all 0.2s;
     strong {
@@ -79,9 +81,24 @@ export const Content = styled.div`
 
       p {
         & + p {
-          margin-right: 70%;
+          margin-left: 20px;
+        }
+      }
+      input {
+        border: 2px solid #2dc7ff;
+        border-radius: 4px;
+
+        &:hover {
         }
       }
     }
   }
+`;
+export const Marked = styled.nav`
+  width: 15px;
+  height: 15px;
+  background: #bbb;
+  border-radius: 50%;
+  border: 3.5px solid
+    ${(props) => (props.isMarked ? '#2dc7ff' : 'rgba(0,0,0,0)')};
 `;
