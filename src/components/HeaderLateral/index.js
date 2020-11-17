@@ -4,7 +4,7 @@ import { CgWorkAlt } from 'react-icons/cg';
 import { BsGraphUp, BsFileText } from 'react-icons/bs';
 import { RiWalletLine } from 'react-icons/ri';
 import { Container, Badge } from './styles';
-
+import { Link } from 'react-router-dom';
 function HeaderLateral() {
   const [visible, setVisible] = useState(false);
 
@@ -18,18 +18,24 @@ function HeaderLateral() {
         <BiMenu color="#000" size={30} />
       </Badge>
       <ul>
-        <li>
-          <BsFileText color="#000" size={25} />
-          <h5>Pedidos</h5>
-        </li>
-        <li>
-          <BsGraphUp color="#000" size={25} />
-          <h5>Análise de Dados</h5>
-        </li>
-        <li>
-          <BiBone color="#000" size={25} />
-          <h5>Produtos</h5>
-        </li>
+        <Link to="/Pedido">
+          <li>
+            <BsFileText color="#000" size={25} />
+            Pedido
+          </li>
+        </Link>
+        <Link to="/Controle">
+          <li>
+            <BsGraphUp color="#000" size={25} />
+            Análise de Dados
+          </li>
+        </Link>
+        <Link to="/Produto">
+          <li>
+            <BiBone color="#000" size={25} />
+            Produto
+          </li>
+        </Link>
       </ul>
     </Container>
   );

@@ -5,36 +5,6 @@ export const Container = styled.div`
   background: url(${fundo}) no-repeat left top;
   background-size: 1400px 500px;
   min-height: 100vh;
-<<<<<<< HEAD
-  width: 100%;
-  max-height: 100vw;
-  input {
-    width: 380px;
-    margin-left: 430px;
-    margin-top: 310px;
-    padding: 6px;
-    padding-left: 15px;
-    border: 0;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    border-radius: 2px;
-  }
-  button {
-    margin-left: 15px;
-    padding: 6px;
-    width: 100px;
-    border: 0;
-    background: #2dc7ff;
-    border-radius: 2px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    font-weight: bold;
-    &:hover {
-      border: 2px solid #2dc7ff;
-      background: none;
-      color: #2dc7ff;
-      border-radius: 2px;
-      background: #fff;
-    }
-=======
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -43,7 +13,6 @@ export const Container = styled.div`
     margin-top: 10px;
     font-size: 16px;
     justify-content: center;
->>>>>>> 0e191eefeef115c18c9c14f0f3b660847723bd93
   }
 `;
 

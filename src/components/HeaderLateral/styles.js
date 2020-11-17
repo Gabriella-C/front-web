@@ -10,7 +10,9 @@ export const Container = styled.div`
     ${(props) => (props.visible ? 'rgba(0,0,0,0.4)' : 'none')};
   background: #fefefe;
   top: 50px;
-
+  a {
+    color: #000;
+  }
   ul {
     display: ${(props) => (props.visible ? 'block' : 'none')};
     margin-top: 20px;

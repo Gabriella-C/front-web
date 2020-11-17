@@ -18,7 +18,7 @@ function Controle() {
           <ChartForm
             visible={visible}
             width={400}
-            height={300}
+            height={280}
             chartType="PieChart"
             loader={<div>Loading Chart</div>}
             data={vendas}
@@ -42,7 +42,7 @@ function Controle() {
             <Box>
               <BsPieChartFill color="#fff" size={40} />
             </Box>
-            <strong>Vendas Anuais</strong>
+            <strong>Vendas Diárias</strong>
           </Unbox>
           <Unbox>
             <Box>
@@ -50,11 +50,11 @@ function Controle() {
             </Box>
             <strong>Vendas Mensais</strong>
           </Unbox>
-          <Unbox onClick={handleToggleVisible}>
-            <Box>
+          <Unbox>
+            <Box onClick={handleToggleVisible}>
               <RiBarChartFill color="#fff" size={40} />
             </Box>
-            <strong>Vendas Diárias</strong>
+            <strong>Vendas Anuais</strong>
           </Unbox>
         </Bottom>
       </Container>

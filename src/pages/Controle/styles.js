@@ -13,6 +13,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  overflow-x: hidden;
   h1 {
     margin-top: 20px;
     font-size: 18px;
@@ -49,9 +50,10 @@ export const Box = styled.button`
   margin-bottom: 10px;
   transition: all 0.2s;
   border: 0;
+  cursor: pointer;
 `;
 
-export const Unbox = styled.button`
+export const Unbox = styled.div`
   border: 0;
   background: none;
   display: flex;
@@ -74,6 +76,8 @@ export const Unbox = styled.button`
 export const Top = styled.div`
   margin-top: 100px;
   border-radius: 4px;
+  overflow-y: hidden;
+  padding: 10px;
 `;
 
 export const ChartForm = styled(Chart)`
