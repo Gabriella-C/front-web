@@ -5,6 +5,7 @@ export const Container = styled.div`
   border-bottom: 2px solid #2dc7ff;
   position: absolute;
   min-width: 100vw;
+  max-width: 100vw;
   width: 100%;
   div {
     display: flex;

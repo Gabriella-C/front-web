@@ -5,6 +5,8 @@ export const Container = styled.div`
   background: url(${fundo}) no-repeat left top;
   background-size: 1400px 500px;
   min-height: 100vh;
+  width: 100%;
+  max-height: 100vw;
   input {
     width: 380px;
     margin-left: 430px;

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import fundo from '../../assets/fundoHome.png';
+import fundo from '../../assets/fundoPetShop.jpg';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   background: url(${fundo}) no-repeat left top;
-  background-size: 1200px 500px;
+  background-size: 1400px 700px;
   min-height: 100vh;
 `;
 

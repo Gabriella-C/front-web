@@ -1,17 +1,62 @@
 import React from 'react';
-
-import { Container } from './styles';
+import { BsBarChartFill, BsPieChartFill } from 'react-icons/bs';
+import { RiBarChartFill } from 'react-icons/ri';
+import { vendas } from '../../data/data';
+import { Container, Box, Bottom, Unbox, Top, ChartForm } from './styles';
 import HeaderLateral from '../../components/HeaderLateral';
-
 function Controle() {
+  const [visible, setVisible] = React.useState(true);
+
+  function handleToggleVisible() {
+    setVisible(!visible);
+  }
   return (
     <>
       <HeaderLateral />
       <Container>
-        <h1>
-          Você ainda não recebeu nenhum pedido, assim que receber
-          avisaremos!
-        </h1>
+        <Top>
+          <ChartForm
+            visible={visible}
+            width={400}
+            height={300}
+            chartType="PieChart"
+            loader={<div>Loading Chart</div>}
+            data={vendas}
+            options={{
+              title: 'Vendas Diárias',
+              chartArea: { width: '80%' },
+              backgroundColor: 'none',
+              hAxis: {
+                title: 'Total de Vendas',
+                minValue: 0,
+              },
+              vAxis: {
+                title: 'Vendas',
+              },
+            }}
+            legendToggle
+          />
+        </Top>
+        <Bottom>
+          <Unbox>
+            <Box>
+              <BsPieChartFill color="#fff" size={40} />
+            </Box>
+            <strong>Vendas Anuais</strong>
+          </Unbox>
+          <Unbox>
+            <Box>
+              <BsBarChartFill color="#fff" size={40} />
+            </Box>
+            <strong>Vendas Mensais</strong>
+          </Unbox>
+          <Unbox onClick={handleToggleVisible}>
+            <Box>
+              <RiBarChartFill color="#fff" size={40} />
+            </Box>
+            <strong>Vendas Diárias</strong>
+          </Unbox>
+        </Bottom>
       </Container>
     </>
   );

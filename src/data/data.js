@@ -30,3 +30,12 @@ export const data = [
     ],
   },
 ];
+
+export const vendas = [
+  ['Vendas', 'Totais diárias'],
+  ['Ração Golden Carne e Arroz', 8],
+  ['Ração Magnus Carne', 3],
+  ['Coleira Chip Dog', 7],
+  ['Pote de água', 2],
+  ['Petisco Looper', 12],
+];
