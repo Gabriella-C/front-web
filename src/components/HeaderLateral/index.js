@@ -5,6 +5,7 @@ import { BsGraphUp, BsFileText } from 'react-icons/bs';
 import { RiWalletLine } from 'react-icons/ri';
 import { Container, Badge } from './styles';
 import { Link } from 'react-router-dom';
+
 function HeaderLateral() {
   const [visible, setVisible] = useState(false);
 

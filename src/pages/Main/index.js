@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Parcerias, BoasVindas } from './styles';
 import { useHistory } from 'react-router-dom';
-
+import { parcerias } from '../../data/data';
 function Main() {
   const history = useHistory();
   return (
@@ -9,7 +9,7 @@ function Main() {
       <BoasVindas>
         <div>
           <h2>
-            Olá, nós somos a SmartPet. Nossa missão é entregar o produto para
+            Olá! nós somos a SmartPet. Nossa missão é entregar o produto para
             nossos clientes com eficácia e qualidade, voltado em ajudar a você
             Micro empreendedor a crescer o seu negócio e alavancar sua renda.
             Não seja tímido, venha vender o seu produto conosco!
@@ -20,12 +20,9 @@ function Main() {
       <Parcerias>
         <h3> Marcas Parceiras:</h3>
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          {parcerias.map((p) => (
+            <img src={p.url} alt={p.id} />
+          ))}
         </ul>
       </Parcerias>
     </Container>

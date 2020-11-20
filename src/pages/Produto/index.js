@@ -11,7 +11,6 @@ function Produto() {
         <div>
           <h3> Cadastro de Produto</h3>
           <form>
-            <ImageInput />
             <input type="text" name="nome" id="nome" placeholder="Nome" />
             <input type="date" name="data" id="data" placeholder="Validade" />
             <input type="text" name="valor" id="valor" placeholder="Valor" />
