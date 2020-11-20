@@ -30,6 +30,9 @@ export const ListaPedido = styled.ul`
   width: 100%;
   max-width: 1200px;
   min-width: 800px;
+  p {
+    text-align: center
+  }
 `;
 
 export const ComponentePedido = styled.li`
@@ -100,5 +103,18 @@ export const ComponentePedido = styled.li`
 
   & + li {
     margin-top: 20px;
+  }
+
+  button {
+    font-size: 11px;
+    margin-top: 20px;
+    color: #2dc7ff;
+    transition: all 0.2s;
+    border-color: transparent;
+
+    &:hover {
+      color: #2dc4cc;
+      border-bottom: 2px solid #f76abc;
+    }
   }
 `;

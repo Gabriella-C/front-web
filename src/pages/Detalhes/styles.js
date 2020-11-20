@@ -91,7 +91,13 @@ export const Content = styled.div`
         &:hover {
         }
       }
-    }
+      .previsao {
+        padding: 0px;
+        margin-top: 0px;
+        width: 100px;
+        height: 27px;
+        font-size: 10px;
+      }
   }
 `;
 export const Marked = styled.nav`
@@ -102,3 +108,4 @@ export const Marked = styled.nav`
   border: 3.5px solid
     ${(props) => (props.isMarked ? '#2dc7ff' : 'rgba(0,0,0,0)')};
 `;
+
