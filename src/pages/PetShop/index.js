@@ -83,7 +83,7 @@ function PetShop() {
           placeholder="Confirmação de Senha"
           ref={register}
         />
-        {errors.email && <p>{errors.email.message}</p>};
+        {errors.email && <p>{errors.email.message}</p>}
         <button type="submit"> Cadastrar </button>
       </form>
     </Container>
