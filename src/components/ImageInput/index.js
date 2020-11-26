@@ -1,33 +1,24 @@
-import React, { useState } from 'react';
-
+import React, { useState, useRef } from 'react';
 import { Container } from './styles';
-import api from '../../services/api';
+import axios from 'axios';
 
 function ImageInput() {
-  const [file, setFile] = React.useState();
-  const [preview, setPreview] = React.useState();
-  const [registerField, setRegisterField] = useState();
-  const ref = React.useRef();
-
-  React.useEffect(() => {
-    if (ref.current) {
-      setRegisterField({
-        name: 'image_id',
-        ref: ref.current,
-        path: 'dataset.file',
-      });
-    }
-  }, [ref, registerField]);
+  const [preview, setPreview] = useState('');
+  const ref = useRef();
 
   async function handleChange(e) {
     const data = new FormData();
 
-    data.append('file', e.target.files[0]);
-    const response = await api.post('files', data);
+    console.log(e.target.files[0])
+    data.append('img', e.target.files[0]);
+    console.log(data.file)
+    console.log(e)
+    console.log(ref)
+    const response = await axios.post('http://localhost:3333/imgprodutoimg', data);
 
-    const { id, url } = response.data;
+    console.log(response.data)
+    const { url } = response.data;
 
-    setFile(id);
     setPreview(url);
   }
   return (
@@ -44,7 +35,6 @@ function ImageInput() {
           type="file"
           id="product"
           accept="image/*"
-          data-file={file}
           onChange={handleChange}
           ref={ref}
         />

@@ -8,14 +8,17 @@ export const Container = styled.div`
   width: ${(props) => (props.visible ? '400px' : '100px')};
   box-shadow: 2px 2px 5px
     ${(props) => (props.visible ? 'rgba(0,0,0,0.4)' : 'none')};
-  background: #fefefe;
-  top: 50px;
-  a {
+    background: #fefefe;
+    top: 50px;
+  button {
     color: #000;
+    border-color: transparent;
+    background-color: transparent;
   }
   ul {
-    display: ${(props) => (props.visible ? 'block' : 'none')};
+    display: ${(props) => (props.visible ? 'flex' : 'none')};
     margin-top: 20px;
+    flex-direction: column;
     li {
       padding-left: 50px;
       padding-bottom: 20px;

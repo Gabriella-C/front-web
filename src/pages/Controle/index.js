@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BsBarChartFill, BsPieChartFill } from 'react-icons/bs';
 import { RiBarChartFill } from 'react-icons/ri';
 import { vendas } from '../../data/data';
-// import { Container, Box, Bottom, Unbox, Top, ChartForm } from './styles';
+import { Container, Box, Bottom, Unbox, Top, ChartForm } from './styles';
 import HeaderLateral from '../../components/HeaderLateral';
+import { useLocation } from 'react-router-dom';
 function Controle() {
   const [visible, setVisible] = React.useState(true);
+  const location = useLocation();
+  const [empresa, setEmpresa] = useState('');
+
+  useEffect(() => {
+    let id = location.state.id;
+    setEmpresa(id);
+  }, []);
 
   function handleToggleVisible() {
     setVisible(!visible);
   }
   return (
     <>
-      <HeaderLateral />
-      {/* <Container>
+      <HeaderLateral empresa={empresa} />
+      <Container>
         <Top>
           <ChartForm
             visible={visible}
@@ -57,7 +65,7 @@ function Controle() {
             <strong>Vendas Anuais</strong>
           </Unbox>
         </Bottom>
-      </Container> */}
+      </Container>
     </>
   );
 }
