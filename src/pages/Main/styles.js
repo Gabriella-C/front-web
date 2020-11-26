@@ -5,6 +5,7 @@ export const Container = styled.div`
   background: url(${fundo}) no-repeat left top;
   background-size: 1400px 500px;
   min-height: 100vh;
+  max-width: 100vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -24,7 +25,7 @@ export const Parcerias = styled.div`
 
   ul {
     display: flex;
-    li {
+    img {
       width: 90px;
       height: 90px;
       border-radius: 50%;

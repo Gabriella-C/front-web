@@ -7,6 +7,13 @@ export const Container = styled.div`
   min-width: 100vw;
   max-width: 100vw;
   width: 100%;
+
+  img {
+    width: 45px;
+    height: 45px;
+    margin-left: 20px;
+    margin-top: 2px;
+  }
   div {
     display: flex;
     float: right;

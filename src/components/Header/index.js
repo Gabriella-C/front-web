@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-
+import logo from '../../assets/LogoSmartPet.png';
 import { Container } from './styles';
 
 function Header() {
   const history = useHistory();
   return (
     <Container>
+      <img src={logo} alt="" />
       <div>
         <ul>
           <li>
