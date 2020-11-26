@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import HeaderLateral from '../../components/HeaderLateral';
 import { formatPrice } from '../../util/format';
 import { Container, ListaPedido, ComponentePedido } from './styles';
@@ -8,10 +8,12 @@ import axios from 'axios';
 function Pedido() {
   const location = useLocation();
   const [pedidos, setPedidos] = useState([]);
+  const [idempresa, setIdempresa] = useState('');
   const history = useHistory();
 
   useEffect(() => {
     let id = location.state.id;
+    setIdempresa(id);
     let idempresa = 'idempresa = ' + id;
     axios.post('http://localhost:3333/List_Pedidos', { 'id': idempresa })
       .then(
@@ -23,7 +25,7 @@ function Pedido() {
 
   return (
     <>
-      <HeaderLateral />
+      <HeaderLateral empresa={idempresa} />
       <Container>
         <h2>Pedidos</h2>
         <div>

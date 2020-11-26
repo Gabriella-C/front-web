@@ -5,9 +5,20 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 function Login() {
+  /* useForm: pegamos as funções de register, handleSubmit, errors, 
+  que servem respectivamente para registrar o input, validar os dados
+  antes de invocar o onsubmit, e caso o register peça algo no input e não for cumprido o errors vai apontar o erro.
+  */
   const { register, handleSubmit, errors } = useForm();
+  //history: é usado para mandar informações com state e nos encaminhar para a tela desejada com o pathname
   const history = useHistory();
 
+  /*função onSubmit: verifica os dados inseridos no form, 
+  se tiver algum vazio ele retorna campos nulos, estando todos os
+  campos preenchidos manda os dados para a nossa API, onde é mandado para o banco,
+  para verificar se existe esse usuário. Existindo o usuário ele é mandado para tela de pedidos,
+  caso contrário é informado que ou o usuário é inválido ou a senha é inválida.
+  */
   function onSubmit(data) {
     if (data.email === '' || data.senha === '') {
       alert('Campos nulos');

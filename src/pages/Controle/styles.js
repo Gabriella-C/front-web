@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import fundoDash from '../../assets/fundoDash.jpg';
-// import { Chart } from 'react-google-charts';
+import { Chart } from 'react-google-charts';
 
 export const Container = styled.div`
   min-width: 100vw;
@@ -80,7 +80,7 @@ export const Top = styled.div`
   padding: 10px;
 `;
 
-// export const ChartForm = styled(Chart)`
-//   display: ${(props) => (props.visible ? 'block' : 'none')};
-//   color: #fff;
-// `;
+export const ChartForm = styled(Chart)`
+  display: ${(props) => (props.visible ? 'block' : 'none')};
+  color: #fff;
+`;

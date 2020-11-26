@@ -78,6 +78,11 @@ export const Container = styled.div`
         border-radius: 2px;
       }
     }
+    p {
+      color: red;
+      margin-top: 5px;
+      margin-bottom: -10px;
+    }
   }
 `;
 

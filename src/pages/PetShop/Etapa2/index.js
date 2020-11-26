@@ -3,6 +3,7 @@ import { Container } from '../styles';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { numeroMask, cepMask, celularMask, telefoneMask, soLetraMask, soLetraMMask } from '../../../Mascara/mask'
 
 function Etapa2() {
   const history = useHistory();
@@ -13,6 +14,12 @@ function Etapa2() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [plano, setPlano] = useState('');
+  const [numero, setNumero] = useState('');
+  const [cep, setCep] = useState('');
+  const [celular, setCelular] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [estado, setEstado] = useState('');
 
   useEffect(() => {
     setNome(location.state.nome);
@@ -33,6 +40,12 @@ function Etapa2() {
       data.estado === ''
     ) {
       alert('Apenas Telefone e Complemento não é obrigatório!')
+    } else if (cep.length < 9) {
+      alert('O CEP está incompleto!')
+    } else if (celular.length < 16) {
+      alert('O celular está incompleto!')
+    } else if (data.telefone !== '' && telefone.length < 15) {
+      alert('O telefone está incompleto!')
     } else {
       axios.post('http://localhost:3333/Company_Register', {
         'nome': nome,
@@ -50,7 +63,8 @@ function Etapa2() {
         'estado': data.estado,
         'complemento': data.complemento
       }).then(
-        history.push('/Login')
+        alert('cadastrado com sucesso!'),
+        history.push('/Login'),
       )
     }
   }
@@ -65,6 +79,9 @@ function Etapa2() {
             id="celular"
             placeholder="Celular"
             ref={register}
+            value={celular}
+            onChange={event => { setCelular(celularMask(event.target.value)) }}
+            maxLength='16'
           />
           <input
             type="text"
@@ -72,6 +89,9 @@ function Etapa2() {
             id="telefone"
             placeholder="Telefone"
             ref={register}
+            value={telefone}
+            onChange={event => { setTelefone(telefoneMask(event.target.value)) }}
+            maxLength='15'
           />
         </div>
         <input
@@ -82,8 +102,25 @@ function Etapa2() {
           ref={register}
         />
         <div>
-          <input type="text" name="numero" id="numero" placeholder="Numero" ref={register} />
-          <input type="text" name="cep" id="cep" placeholder="CEP" ref={register} />
+          <input
+            type="text"
+            name="numero"
+            id="numero"
+            placeholder="Numero"
+            ref={register}
+            value={numero}
+            onChange={event => { setNumero(numeroMask(event.target.value)) }}
+          />
+          <input
+            type="text"
+            name="cep"
+            id="cep"
+            placeholder="CEP"
+            ref={register}
+            value={cep}
+            maxLength='9'
+            onChange={event => { setCep(cepMask(event.target.value)) }}
+          />
         </div>
         <input
           type="text"
@@ -91,10 +128,21 @@ function Etapa2() {
           id="cidade"
           placeholder="Cidade"
           ref={register}
+          value={cidade}
+          onChange={event => { setCidade(soLetraMask(event.target.value)) }}
         />
         <div>
           <input type="text" name="bairro" id="bairro" placeholder="Bairro" ref={register} />
-          <input type="text" name="estado" id="estado" placeholder="Estado" ref={register} />
+          <input
+            type="text"
+            name="estado"
+            id="estado"
+            placeholder="Estado"
+            ref={register}
+            maxLength='2'
+            value={estado}
+            onChange={event => { setEstado(soLetraMMask(event.target.value)) }}
+          />
         </div>
         <input
           type="text"
