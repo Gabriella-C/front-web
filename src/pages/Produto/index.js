@@ -2,7 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Container, ImageInput } from './styles';
 import HeaderLateral from '../../components/HeaderLateral';
 import { useLocation, useHistory } from 'react-router-dom';
-import { moedaMask, soLetraMask, pesoMask, numeroMask, dataMask, virgulaPontoMask } from '../../Mascara/mask';
+import {
+  moedaMask,
+  soLetraMask,
+  pesoMask,
+  numeroMask,
+  dataMask,
+  virgulaPontoMask,
+} from '../../Mascara/mask';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
@@ -24,30 +31,30 @@ function Produto() {
   useEffect(() => {
     let id = location.state.id;
     setEmpresa(id);
-    axios.post('http://localhost:3333/Last_Product', { 'id': id })
-      .then(
-        res => {
-          setUltimoProd(res.data[0].max);
-        }
-      ).catch(e => {
+    axios
+      .post('http://localhost:3333/Last_Product', { id: id })
+      .then((res) => {
+        setUltimoProd(res.data[0].max);
+      })
+      .catch((e) => {
         alert('Erro inesperado, tente novamente recarregando a página');
       });
 
-    axios.get('http://localhost:3333/Category')
-      .then(
-        res => {
-          setCategoria(res.data);
-        }
-      ).catch(e => {
+    axios
+      .get('http://localhost:3333/Category')
+      .then((res) => {
+        setCategoria(res.data);
+      })
+      .catch((e) => {
         alert('Erro inesperado, tente novamente recarregando a página');
       });
 
-    axios.get('http://localhost:3333/Species')
-      .then(
-        res => {
-          setEspecie(res.data);
-        }
-      ).catch(e => {
+    axios
+      .get('http://localhost:3333/Species')
+      .then((res) => {
+        setEspecie(res.data);
+      })
+      .catch((e) => {
         alert('Erro inesperado, tente novamente recarregando a página');
       });
   }, []);
@@ -56,7 +63,10 @@ function Produto() {
     const data = new FormData();
 
     data.append('img', e.target.files[0]);
-    const response = await axios.post('http://localhost:3333/imgproduto' + ultimoProd + '_' + empresa, data);
+    const response = await axios.post(
+      'http://localhost:3333/imgproduto' + ultimoProd + '_' + empresa,
+      data
+    );
 
     const { url, img } = response.data;
 
@@ -66,62 +76,65 @@ function Produto() {
 
   async function handleSpecie(e) {
     const id_specie = e.target.value;
-    axios.post('http://localhost:3333/Breed', { 'id_species': id_specie })
-      .then(
-        res => {
-          setRaca(res.data);
-        }
-      )
+    axios
+      .post('http://localhost:3333/Breed', { id_species: id_specie })
+      .then((res) => {
+        setRaca(res.data);
+      });
   }
-
 
   function onSubmit(data) {
     if (
-      data.nome == '' ||
-      data.valor == '' ||
-      data.peso == '' ||
-      data.unidMed == '' ||
-      data.raca == '' ||
-      data.categoria == '0' ||
-      data.especie == '0'
+      data.nome === '' ||
+      data.valor === '' ||
+      data.peso === '' ||
+      data.unidMed === '' ||
+      data.raca === '' ||
+      data.categoria === '0' ||
+      data.especie === '0'
     ) {
-      alert('Somente os campos validade, descrição, marca e foto não são obrigatórios');
+      alert(
+        'Somente os campos validade, descrição, marca e foto não são obrigatórios'
+      );
     } else {
-      axios.post('http://localhost:3333/Product_Create',
-        {
-          "nome": data.nome,
-          "validade": dataMask(data.data),
-          "preco": numeroMask(data.valor),
-          "empresa": empresa,
-          "marca": data.marca,
-          "peso": numeroMask(data.peso),
-          "descricao": data.descricao,
-          "um": data.unidMed,
-          "foto": img
-        }).then(
-          axios.post('http://localhost:3333/Last_Product', { 'id': empresa })
-            .then(
-              res => {
-                axios.post('http://localhost:3333/Category_Create',
-                  {
-                    "categoria": data.categoria,
-                    "produto": res.data[0].max,
-                    "raca": data.raca
-                  }).then(
-                    res => {
-                      alert('Produto cadastrado com sucesso!!')
-                    }
-                  ).catch(
-                    e => {
-                      alert("Erro inesperado, tente novamente recarregando a página");
-                    }
-                  )
-              }
-            ).catch(e => {
+      axios
+        .post('http://localhost:3333/Product_Create', {
+          nome: data.nome,
+          validade: dataMask(data.data),
+          preco: numeroMask(data.valor),
+          empresa: empresa,
+          marca: data.marca,
+          peso: numeroMask(data.peso),
+          descricao: data.descricao,
+          um: data.unidMed,
+          foto: img,
+        })
+        .then(
+          axios
+            .post('http://localhost:3333/Last_Product', { id: empresa })
+            .then((res) => {
+              axios
+                .post('http://localhost:3333/Category_Create', {
+                  categoria: data.categoria,
+                  produto: res.data[0].max,
+                  raca: data.raca,
+                })
+                .then((res) => {
+                  alert('Produto cadastrado com sucesso!!');
+                })
+                .catch((e) => {
+                  alert(
+                    'Erro inesperado, tente novamente recarregando a página'
+                  );
+                });
+            })
+            .catch((e) => {
               alert('Erro inesperado, tente novamente recarregando a página');
             })
-
-        ).catch(e => { alert('Erro ao cadastrar, tente novamente!') });
+        )
+        .catch((e) => {
+          alert('Erro ao cadastrar, tente novamente!');
+        });
     }
   }
   return (
@@ -150,14 +163,54 @@ function Produto() {
                 />
               </label>
             </ImageInput>
-            <input type="text" name="nome" id="nome" placeholder="Nome" ref={register} />
-            <div className='dataCategoriaEspecie'>
-              <label className='data'>Validade: </label>
-              <input type="date" name="data" id="data" placeholder="Validade" ref={register} />
+            <input
+              type="text"
+              name="nome"
+              id="nome"
+              placeholder="Nome"
+              ref={register}
+            />
+            <div className="dataCategoriaEspecie">
+              <label className="data">Validade: </label>
+              <input
+                type="date"
+                name="data"
+                id="data"
+                placeholder="Validade"
+                ref={register}
+              />
             </div>
-            <input type="text" name="valor" id="valor" placeholder="Valor" value={valor} onChange={event => { setValor(moedaMask(event.target.value)) }} maxLength='9' ref={register} />
-            <input type="text" name="marca" id="marca" placeholder="Marca" ref={register} />
-            <input type="text" name="peso" id="peso" placeholder="Peso" ref={register} value={peso} onChange={event => { setPeso(pesoMask(event.target.value)) }} maxLength='6' />
+            <input
+              type="text"
+              name="valor"
+              id="valor"
+              placeholder="Valor"
+              value={valor}
+              onChange={(event) => {
+                setValor(moedaMask(event.target.value));
+              }}
+              maxLength="9"
+              ref={register}
+            />
+            <input
+              type="text"
+              name="marca"
+              id="marca"
+              placeholder="Marca"
+              ref={register}
+            />
+            <input
+              type="text"
+              name="peso"
+              id="peso"
+              placeholder="Peso"
+              ref={register}
+              value={peso}
+              onChange={(event) => {
+                setPeso(pesoMask(event.target.value));
+              }}
+              maxLength="6"
+            />
 
             <input
               type="text"
@@ -165,9 +218,11 @@ function Produto() {
               id="unidMed"
               placeholder="Unidade de Medida"
               ref={register}
-              maxLength='2'
+              maxLength="2"
               value={um}
-              onChange={event => { setUm(soLetraMask(event.target.value)) }}
+              onChange={(event) => {
+                setUm(soLetraMask(event.target.value));
+              }}
             />
             <input
               type="text"
@@ -176,33 +231,48 @@ function Produto() {
               placeholder="Descrição de Produto"
               ref={register}
             />
-            <div className='dataCategoriaEspecie'>
+            <div className="dataCategoriaEspecie">
               <label>Categoria: </label>
-              <select name='categoria' id='categoria' ref={register}>
-                <option value='0' key='0'>Escolher</option>
+              <select name="categoria" id="categoria" ref={register}>
+                <option value="0" key="0">
+                  Escolher
+                </option>
                 {categoria.map(({ idcategoria, nome_categoria }) => (
-                  <option value={idcategoria} key={idcategoria}>{nome_categoria}</option>
+                  <option value={idcategoria} key={idcategoria}>
+                    {nome_categoria}
+                  </option>
                 ))}
               </select>
             </div>
-            <div className='dataCategoriaEspecie'>
+            <div className="dataCategoriaEspecie">
               <label>Espécie: </label>
-              <select name='especie' id='especie' ref={register} onChange={handleSpecie}>
-                <option value='0' key='0'>Escolher</option>
+              <select
+                name="especie"
+                id="especie"
+                ref={register}
+                onChange={handleSpecie}
+              >
+                <option value="0" key="0">
+                  Escolher
+                </option>
                 {especie.map(({ idespecie, nome_especie }) => (
-                  <option value={idespecie} key={idespecie}>{nome_especie}</option>
+                  <option value={idespecie} key={idespecie}>
+                    {nome_especie}
+                  </option>
                 ))}
               </select>
             </div>
-            <div className='dataCategoriaEspecie'>
+            <div className="dataCategoriaEspecie">
               <label>Raça: </label>
-              <select name='raca' id='raca' ref={register}>
+              <select name="raca" id="raca" ref={register}>
                 {raca.map(({ idraca, nome_raca }) => (
-                  <option value={idraca} key={idraca}>{nome_raca}</option>
+                  <option value={idraca} key={idraca}>
+                    {nome_raca}
+                  </option>
                 ))}
               </select>
             </div>
-            <button type='submit'>Cadastrar</button>
+            <button type="submit">Cadastrar</button>
           </form>
         </div>
       </Container>
