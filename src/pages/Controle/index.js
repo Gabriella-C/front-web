@@ -2,7 +2,7 @@ import React from 'react';
 import { BsBarChartFill, BsPieChartFill } from 'react-icons/bs';
 import { RiBarChartFill } from 'react-icons/ri';
 import { vendas } from '../../data/data';
-// import { Container, Box, Bottom, Unbox, Top, ChartForm } from './styles';
+import { Container, Box, Bottom, Unbox, Top, ChartForm } from './styles';
 import HeaderLateral from '../../components/HeaderLateral';
 function Controle() {
   const [visible, setVisible] = React.useState(true);
@@ -13,7 +13,7 @@ function Controle() {
   return (
     <>
       <HeaderLateral />
-      {/* <Container>
+      <Container>
         <Top>
           <ChartForm
             visible={visible}
@@ -57,7 +57,7 @@ function Controle() {
             <strong>Vendas Anuais</strong>
           </Unbox>
         </Bottom>
-      </Container> */}
+      </Container>
     </>
   );
 }

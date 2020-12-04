@@ -12,6 +12,7 @@ import Etapa2 from './pages/PetShop/Etapa2';
 import Detalhes from './pages/Detalhes';
 import Produto from './pages/Produto';
 import ListaProd from './pages/ListaProd';
+import Perfil from './pages/Perfil';
 
 export default function Routes() {
   return (
@@ -27,6 +28,7 @@ export default function Routes() {
       <Route path="/Detalhes" component={Detalhes} />
       <Route path="/Produto" component={Produto} />
       <Route path="/ListaProd" component={ListaProd} />
+      <Route path="/Perfil" component={Perfil} />
     </Switch>
   );
 }

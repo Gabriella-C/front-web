@@ -17,7 +17,7 @@ export const Container = styled.div`
     display: ${(props) => (props.visible ? 'block' : 'none')};
     margin-top: 20px;
     li {
-      padding-left: 50px;
+      padding-left: 40px;
       padding-bottom: 20px;
       padding-top: 20px;
       display: flex;
