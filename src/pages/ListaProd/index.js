@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { Container, ListItem, Button } from './styles';
+import { BiPencil, BiTrash } from 'react-icons/bi';
 import { produto } from '../../data/data';
+import { useHistory } from 'react-router-dom';
 
 function ListaProd() {
   const [marked, setMarked] = React.useState(true);
-
+  const history = useHistory();
   return (
     <Container>
       <ul>
@@ -17,16 +19,18 @@ function ListaProd() {
 
           return (
             <ListItem isMarked={isMarked} id={p.id}>
-              <img src={p.url} />
               <li>
                 <strong>Nome: {p.nome}</strong>
                 <p> Validade: {p.date}</p>
                 <p> Valor: {p.valor}</p>
-                <p> Marca: {p.marca}</p>
-                <p> Peso: {p.peso}</p>
               </li>
               <div>
-                <button onClick={handleMarked(p.id)} />
+                <button onClick={() => history.push('/EditProduto')}>
+                  <BiPencil size={20} color="#2dc7ff" />
+                </button>
+                <button>
+                  <BiTrash size={20} color="#ec524b" />
+                </button>
               </div>
             </ListItem>
           );

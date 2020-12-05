@@ -20,7 +20,7 @@ export const Container = styled.div`
     margin-top: 20px;
     flex-direction: column;
     li {
-      padding-left: 50px;
+      padding-left: 40px;
       padding-bottom: 20px;
       padding-top: 20px;
       display: flex;
