@@ -1,15 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, ImageInput } from './styles';
 import HeaderLateral from '../../components/HeaderLateral';
 import { useLocation, useHistory } from 'react-router-dom';
-import {
-  moedaMask,
-  soLetraMask,
-  pesoMask,
-  numeroMask,
-  dataMask,
-  virgulaPontoMask,
-} from '../../Mascara/mask';
+import { moedaMask, soLetraMask, pesoMask, numeroMask, dataMask } from '../../Mascara/mask';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
@@ -20,13 +13,12 @@ function Produto() {
   const [um, setUm] = useState('');
   const [peso, setPeso] = useState('');
   const [preview, setPreview] = useState('');
-  const [img, setImg] = useState('');
   const [ultimoProd, setUltimoProd] = useState('');
   const [categoria, setCategoria] = useState([]);
   const [especie, setEspecie] = useState([]);
   const [raca, setRaca] = useState([]);
   const history = useHistory();
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
     let id = location.state.id;
@@ -57,21 +49,25 @@ function Produto() {
       .catch((e) => {
         alert('Erro inesperado, tente novamente recarregando a página');
       });
-  }, []);
+  }, [location]);
 
   async function handleChange(e) {
     const data = new FormData();
-
-    data.append('img', e.target.files[0]);
-    const response = await axios.post(
-      'http://localhost:3333/imgproduto' + ultimoProd + '_' + empresa,
-      data
-    );
-
-    const { url, img } = response.data;
+    const idprod = ultimoProd + 1;
+    data.append('temp', e.target.files[0]);
+    const response = await axios.post('http://localhost:3333/TempImgproduto' + idprod + '_' + empresa, data);
+    const { url } = response.data;
 
     setPreview(url);
-    setImg(img);
+  }
+
+  async function saveImg(foto, ultimoProdid) {
+    const data = new FormData();
+    data.append('img', foto);
+    const response = await axios.post('http://localhost:3333/Imgproduto' + ultimoProdid + '_' + empresa, data);
+
+    const { img } = response.data;
+    return img;
   }
 
   async function handleSpecie(e) {
@@ -84,6 +80,7 @@ function Produto() {
   }
 
   function onSubmit(data) {
+    const foto = data.product[0];
     if (
       data.nome === '' ||
       data.valor === '' ||
@@ -97,44 +94,68 @@ function Produto() {
         'Somente os campos validade, descrição, marca e foto não são obrigatórios'
       );
     } else {
-      axios
-        .post('http://localhost:3333/Product_Create', {
-          nome: data.nome,
-          validade: dataMask(data.data),
-          preco: numeroMask(data.valor),
-          empresa: empresa,
-          marca: data.marca,
-          peso: numeroMask(data.peso),
-          descricao: data.descricao,
-          um: data.unidMed,
-          foto: img,
-        })
-        .then(
-          axios
-            .post('http://localhost:3333/Last_Product', { id: empresa })
-            .then((res) => {
-              axios
-                .post('http://localhost:3333/Category_Create', {
-                  categoria: data.categoria,
-                  produto: res.data[0].max,
-                  raca: data.raca,
-                })
-                .then((res) => {
-                  alert('Produto cadastrado com sucesso!!');
-                })
-                .catch((e) => {
-                  alert(
-                    'Erro inesperado, tente novamente recarregando a página'
-                  );
-                });
+      axios.post('http://localhost:3333/Product_Create',
+        {
+          "nome": data.nome,
+          "validade": dataMask(data.data),
+          "preco": numeroMask(data.valor),
+          "empresa": empresa,
+          "marca": data.marca,
+          "peso": numeroMask(data.peso),
+          "descricao": data.descricao,
+          "um": data.unidMed
+        }).then(
+          axios.post('http://localhost:3333/Last_Product', { 'id': empresa })
+            .then(
+              res => {
+                const ultimoProdid = res.data[0].max;
+                axios.post('http://localhost:3333/Category_Create',
+                  {
+                    "categoria": data.categoria,
+                    "produto": res.data[0].max,
+                    "raca": data.raca
+                  }).then(
+                    res => {
+                      saveImg(foto, ultimoProdid).then(
+                        res => {
+                          if (res !== 'undefined' || res !== '') {
+                            axios.post('http://localhost:3333/Product_Update_Photo', { "id": empresa, "foto": res, "idprod": ultimoProdid })
+                              .then(
+                                alert('Produto cadastrado com sucesso!!'),
+                                clear()
+                              ).catch(e => alert('ocorreu um erro: ' + e))
+                          } else {
+                            alert('ocorreu um erro, com a imagem, vá aos produtos cadastrados e atualize a imagem do último produto cadastrado');
+                          }
+                        }
+                      )
+                    }
+                  ).catch(
+                    e => {
+                      alert("Erro inesperado, tente novamente recarregando a página " + e);
+                    }
+                  )
+              }
+            ).catch(e => {
+              alert('Erro inesperado, tente novamente recarregando a página a ' + e);
             })
-            .catch((e) => {
-              alert('Erro inesperado, tente novamente recarregando a página');
-            })
-        )
-        .catch((e) => {
-          alert('Erro ao cadastrar, tente novamente!');
+
+        ).catch(e => { alert('Erro ao cadastrar, tente novamente!') });
+      function clear() {
+        reset({
+          nome: '',
+          data: '',
+          marca: '',
+          descricao: '',
+          categoria: '0',
+          especie: '0'
         });
+        setRaca([]);
+        setValor('');
+        setPeso('');
+        setUm('');
+        setPreview('');
+      }
     }
   }
   return (
@@ -147,6 +168,7 @@ function Produto() {
             <ImageInput>
               <label htmlFor="product">
                 <img
+                  name="img"
                   src={
                     preview ||
                     'https://madeirasgasometro.vteximg.com.br/arquivos/ids/168849-1000-1000/mdf-cinza-sagrado-essencial-imagem-01.jpg?v=636655430222730000'
@@ -157,6 +179,7 @@ function Produto() {
                 <input
                   type="file"
                   id="product"
+                  name="product"
                   accept="image/*"
                   onChange={handleChange}
                   ref={register}
