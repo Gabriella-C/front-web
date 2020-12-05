@@ -4,7 +4,7 @@ import { CgWorkAlt } from 'react-icons/cg';
 import { BsGraphUp, BsFileText } from 'react-icons/bs';
 import { RiWalletLine } from 'react-icons/ri';
 import { Container, Badge } from './styles';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 function HeaderLateral({ empresa }) {
   const [visible, setVisible] = useState(false);
   const history = useHistory();
