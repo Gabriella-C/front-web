@@ -38,24 +38,25 @@ export const ListItem = styled.li`
     margin-top: 10px;
   }
 
-  img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    background: #eee;
-    border: 2px solid #f76abc;
-    margin-right: 10px;
-  }
-
   div {
-    margin-left: 10%;
-    margin-bottom: 10%;
-    > button {
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      background: #eee;
-      border: 3.5px solid ${(props) => (props.isMarked ? '#f76abc' : '#eee')};
+    right: 15%;
+    margin-bottom: 2%;
+    margin-left: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+
+    button {
+      border: 0;
+      background: none;
+
+      padding: 4px;
+      border-radius: 4px;
+
+      &:hover {
+        background: #eee;
+      }
     }
   }
 
