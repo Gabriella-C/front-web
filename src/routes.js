@@ -13,6 +13,7 @@ import Detalhes from './pages/Detalhes';
 import Produto from './pages/Produto';
 import ListaProd from './pages/ListaProd';
 import Perfil from './pages/Perfil';
+import EditProduto from './pages/EditProduto';
 
 export default function Routes() {
   return (
@@ -29,6 +30,7 @@ export default function Routes() {
       <Route path="/Produto" component={Produto} />
       <Route path="/ListaProd" component={ListaProd} />
       <Route path="/Perfil" component={Perfil} />
+      <Route path="/EditProduto" component={EditProduto} />
     </Switch>
   );
 }
