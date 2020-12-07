@@ -3,14 +3,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-  height: 100%;
+  height: 100vh;
   max-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   ul {
     width: 80%;
-    height: 80%;
     background: #eee;
     padding: 10px;
     border-radius: 4px;

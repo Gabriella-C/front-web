@@ -31,7 +31,7 @@ function Pedido() {
         <div>
           <ListaPedido>
             {pedidos.map(({ idpedido, total, idempresa }) => (
-              <ComponentePedido>
+              <ComponentePedido key={idpedido}>
                 <div>
                   <strong>{'#' + idpedido}</strong>
                 </div>

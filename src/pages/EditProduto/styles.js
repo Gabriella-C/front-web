@@ -81,4 +81,56 @@ export const Container = styled.div`
       border-radius: 2px;
     }
   }
+  .status {
+    padding-bottom: 20px;
+    flex-direction: column;
+  }
+  .statusLabel {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .dataCategoriaEspecie{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    input{
+      width: 70%;
+      margin-bottom: 10px;
+    }
+    .data{
+      margin-bottom: 10px;
+    }
+    select {
+      width: 68%;
+      height: 30px;
+      background: #eee;
+      border: 0;
+      border-radius: 4px;
+      padding-left: 10px;
+    }
+  }
 `;
+
+export const ImageInput = styled.div`
+align-self: center;
+margin-bottom: 10px;
+label {
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid #f76abc;
+  background: #eee;
+}
+
+input {
+  display: none;
+}`;
