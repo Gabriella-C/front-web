@@ -6,7 +6,7 @@ import { Container, Box, Bottom, Unbox, Top, ChartForm } from './styles';
 import HeaderLateral from '../../components/HeaderLateral';
 import { useLocation } from 'react-router-dom';
 function Controle() {
-  const [visible, setVisible] = React.useState(true);
+  const [visible, setVisible] = useState(true);
   const location = useLocation();
   const [empresa, setEmpresa] = useState('');
 

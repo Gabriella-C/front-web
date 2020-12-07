@@ -39,7 +39,7 @@ function Etapa2() {
       data.bairro === '' ||
       data.estado === ''
     ) {
-      alert('Apenas Telefone e Complemento não é obrigatório!')
+      alert('Apenas Telefone e Complemento não são obrigatórios!')
     } else if (cep.length < 9) {
       alert('O CEP está incompleto!')
     } else if (celular.length < 16) {

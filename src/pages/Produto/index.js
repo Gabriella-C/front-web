@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, ImageInput } from './styles';
 import HeaderLateral from '../../components/HeaderLateral';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { moedaMask, soLetraMask, pesoMask, numeroMask, dataMask } from '../../Mascara/mask';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -17,7 +17,6 @@ function Produto() {
   const [categoria, setCategoria] = useState([]);
   const [especie, setEspecie] = useState([]);
   const [raca, setRaca] = useState([]);
-  const history = useHistory();
   const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
@@ -55,7 +54,7 @@ function Produto() {
     const data = new FormData();
     const idprod = ultimoProd + 1;
     data.append('temp', e.target.files[0]);
-    const response = await axios.post('http://localhost:3333/TempImgproduto' + idprod + '_' + empresa, data);
+    const response = await axios.post('http://localhost:3333/ProdTempproduto' + idprod + '_' + empresa, data);
     const { url } = response.data;
 
     setPreview(url);
@@ -64,7 +63,7 @@ function Produto() {
   async function saveImg(foto, ultimoProdid) {
     const data = new FormData();
     data.append('img', foto);
-    const response = await axios.post('http://localhost:3333/Imgproduto' + ultimoProdid + '_' + empresa, data);
+    const response = await axios.post('http://localhost:3333/ProdImgproduto' + ultimoProdid + '_' + empresa, data);
 
     const { img } = response.data;
     return img;

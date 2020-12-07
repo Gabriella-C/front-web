@@ -1,9 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { BiMenu, BiBone } from 'react-icons/bi';
-import { CgWorkAlt } from 'react-icons/cg';
 import { BsGraphUp, BsFileText } from 'react-icons/bs';
-import { RiWalletLine } from 'react-icons/ri';
 import { MdPersonOutline } from 'react-icons/md';
+import { AiOutlineUnorderedList } from "react-icons/ai";
 import { Container, Badge } from './styles';
 import { useHistory } from 'react-router-dom';
 function HeaderLateral({ empresa }) {
@@ -48,6 +47,16 @@ function HeaderLateral({ empresa }) {
           <li>
             <BiBone color="#000" size={25} />
             <h5>Produto</h5>
+          </li>
+        </button>
+        <button
+          onClick={() =>
+            history.push({ pathname: '/ListaProd', state: { id: empresa } })
+          }
+        >
+          <li>
+            <AiOutlineUnorderedList color="#000" size={25} />
+            <h5>Lista de Produto</h5>
           </li>
         </button>
         <button
