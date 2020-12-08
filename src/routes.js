@@ -14,6 +14,7 @@ import Produto from './pages/Produto';
 import ListaProd from './pages/ListaProd';
 import Perfil from './pages/Perfil';
 import EditProduto from './pages/EditProduto';
+import Endereco from './pages/Perfil/Endereco';
 
 export default function Routes() {
   return (
@@ -31,6 +32,7 @@ export default function Routes() {
       <Route path="/ListaProd" component={ListaProd} />
       <Route path="/Perfil" component={Perfil} />
       <Route path="/EditProduto" component={EditProduto} />
+      <Route path="/Endereco" component={Endereco} />
     </Switch>
   );
 }

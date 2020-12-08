@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Parcerias, BoasVindas } from './styles';
 import { useHistory } from 'react-router-dom';
-import { parcerias } from '../../data/data';
+import axios from 'axios';
 function Main() {
   const history = useHistory();
+  const [parcerias, setParcerias] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:3333/Partnerships')
+      .then(
+        res => {
+          setParcerias(res.data);
+        }
+      ).catch(
+        e => {
+          console.log('ocorreu um erro ao carregar imagens: ' + e);
+        }
+      );
+  }, [])
   return (
     <Container>
       <BoasVindas>
@@ -21,7 +34,7 @@ function Main() {
         <h3> Marcas Parceiras:</h3>
         <ul>
           {parcerias.map((p) => (
-            <img src={p.url} alt={p.id} />
+            <img src={`http://localhost:3333/uploads/company/save/${p.foto_perfil}`} alt={p.empresa_id_pedido} key={p.empresa_id_pedido} />
           ))}
         </ul>
       </Parcerias>
