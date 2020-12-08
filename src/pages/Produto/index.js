@@ -246,7 +246,7 @@ function Produto() {
                 setUm(soLetraMask(event.target.value));
               }}
             />
-            <input
+            <textarea
               type="text"
               name="descricao"
               id="descricao"

@@ -401,7 +401,7 @@ function EditProduto() {
             setUm(soLetraMask(e.target.value));
           }}
         />
-        <input
+        <textarea
           type="text"
           name="descricao"
           id="descricao"

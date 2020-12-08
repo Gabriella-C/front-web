@@ -77,6 +77,19 @@ export const Container = styled.div`
     & + input {
       margin-top: 10px;
     }
+  }
+
+  textarea {
+    width: 50%;
+    height: 50px;
+    background: #eee;
+    border: 0;
+    border-radius: 4px;
+    padding-left: 10px;
+    margin-top: 10px;
+    & + input {
+      margin-top: 10px;
+    }
   }`;
 
 export const ImageInput = styled.div`
