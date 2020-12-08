@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import fundo from '../../assets/6308.jpg';
+import fundo from '../../../assets/6308.jpg';
 
 export const Container = styled.div`
   background: url(${fundo}) no-repeat;
@@ -31,17 +31,15 @@ export const Container = styled.div`
     padding: 20px;
     border-radius: 4px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    justify-content: center;
     div {
       display: flex;
-      width: 400px;
-      justify-content: center;
+      width: 300px;
+      justify-content: space-between;
       input {
         width: 140px;
       }
     }
-  }
-  .divButton{
-    justify-content: space-around;
   }
   input {
     margin-top: 20px;
@@ -73,54 +71,4 @@ export const Container = styled.div`
       border-radius: 2px;
     }
   }
-  .plano{
-    width: 84%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 10px;
-    justify-content: space-between;
-    input{
-      width: 70%;
-      margin-bottom: 10px;
-    }
-    select {
-      width: 70%;
-      height: 30px;
-      background: #eee;
-      border: 0;
-      border-radius: 4px;
-      padding-left: 10px;
-    }
-  }
-  .desativar{
-    background-color: #f76abc;
-  }
-  .gratuito{
-    color: grey;
-    font-size: 15px;
-    padding: 10px;
-  }
 `;
-
-export const ImageInput = styled.div`
-align-self: center;
-margin-bottom: 10px;
-margin-top: 10px;
-label {
-  cursor: pointer;
-  &:hover {
-    opacity: 0.7;
-  }
-}
-img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 2px solid #f76abc;
-  background: #eee;
-}
-
-input {
-  display: none;
-}`;
