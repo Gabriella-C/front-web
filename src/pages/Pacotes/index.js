@@ -7,14 +7,14 @@ var obj = [
   'Entrega feita pelo Pet Shop',
   'Taxa de 5% sobre o valor de cada compra',
   'Sistema para verificar pedidos e valor ganho ao mês',
-  'Mensalidade de R$ 30 por mês',
+ 
 ];
 
 var obj2 = [
   'Entrega feita pelo Pet Shop',
   'Taxa de 7% sobre o valor de cada compra',
   'Sistema para verificar pedidos e valor ganho ao mês',
-  'Mensalidade de R$ 50 por mês',
+
   'Aumento de visibilidade',
 ];
 
@@ -22,7 +22,7 @@ var obj3 = [
   'Entrega feita pelo Pet Shop',
   'Taxa de 10% sobre o valor de cada compra',
   'Sistema para verificar pedidos e valor ganho ao mês',
-  'Mensalidade de R$ 100 por mês',
+ 
   'Estrela do nosso aplicativo sempre será os primeiros a serem listados',
 ];
 
