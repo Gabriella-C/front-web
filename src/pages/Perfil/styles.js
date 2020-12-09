@@ -101,6 +101,11 @@ export const Container = styled.div`
     font-size: 15px;
     padding: 10px;
   }
+  p {
+    color: red;
+    margin-top: 5px;
+    margin-bottom: -10px;
+  }
 `;
 
 export const ImageInput = styled.div`

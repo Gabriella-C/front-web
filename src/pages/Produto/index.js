@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, ImageInput } from './styles';
 import HeaderLateral from '../../components/HeaderLateral';
 import { useLocation } from 'react-router-dom';
-import { moedaMask, soLetraMask, pesoMask, numeroMask, dataMask } from '../../Mascara/mask';
+import { moedaMask, soLetraMask, pesoMask, numeroMask } from '../../Mascara/mask';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
@@ -17,19 +17,12 @@ function Produto() {
   const [categoria, setCategoria] = useState([]);
   const [especie, setEspecie] = useState([]);
   const [raca, setRaca] = useState([]);
+  const [imgTemp, setImgTemp] = useState('');
   const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
     let id = location.state.id;
     setEmpresa(id);
-    axios
-      .post('http://localhost:3333/Last_Product', { id: id })
-      .then((res) => {
-        setUltimoProd(res.data[0].max);
-      })
-      .catch((e) => {
-        alert('Erro inesperado, tente novamente recarregando a página');
-      });
 
     axios
       .get('http://localhost:3333/Category')
@@ -52,12 +45,13 @@ function Produto() {
 
   async function handleChange(e) {
     const data = new FormData();
-    const idprod = ultimoProd + 1;
+    const idprod = 'temp';
     data.append('temp', e.target.files[0]);
     const response = await axios.post('http://localhost:3333/ProdTempproduto' + idprod + '_' + empresa, data);
-    const { url } = response.data;
+    const { url, img } = response.data;
 
     setPreview(url);
+    setImgTemp(img);
   }
 
   async function saveImg(foto, ultimoProdid) {
@@ -90,13 +84,12 @@ function Produto() {
       data.especie === '0'
     ) {
       alert(
-        'Somente os campos validade, descrição, marca e foto não são obrigatórios'
+        'Somente os campos descrição, marca e foto não são obrigatórios'
       );
     } else {
       axios.post('http://localhost:3333/Product_Create',
         {
           "nome": data.nome,
-          "validade": dataMask(data.data),
           "preco": numeroMask(data.valor),
           "empresa": empresa,
           "marca": data.marca,
@@ -104,46 +97,54 @@ function Produto() {
           "descricao": data.descricao,
           "um": data.unidMed
         }).then(
-          axios.post('http://localhost:3333/Last_Product', { 'id': empresa })
-            .then(
-              res => {
-                const ultimoProdid = res.data[0].max;
-                axios.post('http://localhost:3333/Category_Create',
-                  {
-                    "categoria": data.categoria,
-                    "produto": res.data[0].max,
-                    "raca": data.raca
-                  }).then(
-                    res => {
-                      saveImg(foto, ultimoProdid).then(
-                        res => {
-                          if (res !== 'undefined' || res !== '') {
-                            axios.post('http://localhost:3333/Product_Update_Photo', { "id": empresa, "foto": res, "idprod": ultimoProdid })
-                              .then(
-                                alert('Produto cadastrado com sucesso!!'),
-                                clear()
-                              ).catch(e => alert('ocorreu um erro: ' + e))
-                          } else {
-                            alert('ocorreu um erro, com a imagem, vá aos produtos cadastrados e atualize a imagem do último produto cadastrado');
-                          }
+          res => {
+            console.log(res);
+            axios.post('http://localhost:3333/Last_Product', { 'id': empresa })
+              .then(
+                res => {
+                  const ultimoProdid = res.data[0].max;
+                  axios.post('http://localhost:3333/Category_Create',
+                    {
+                      "categoria": data.categoria,
+                      "produto": res.data[0].max,
+                      "raca": data.raca
+                    }).then(
+                      res => {
+                        if (foto === null || foto === 'undefined' || foto === undefined || foto === [] || foto === '') {
+                          alert('Produto cadastrado com sucesso!!');
+                          clear();
+                        } else {
+                          saveImg(foto, ultimoProdid).then(
+                            res => {
+                              if (res !== 'undefined' || res !== '') {
+                                axios.post('http://localhost:3333/Product_Update_Photo', { "id": empresa, "foto": res, "idprod": ultimoProdid })
+                                  .then(
+                                    axios.post('http://localhost:3333/DelTempProd', { "file": imgTemp }),
+                                    alert('Produto cadastrado com sucesso!!'),
+                                    clear()
+                                  ).catch(e => alert('ocorreu um erro: ' + e))
+                              } else {
+                                alert('ocorreu um erro, com a imagem, vá aos produtos cadastrados e atualize a imagem do último produto cadastrado');
+                              }
+                            }
+                          )
                         }
-                      )
-                    }
-                  ).catch(
-                    e => {
-                      alert("Erro inesperado, tente novamente recarregando a página " + e);
-                    }
-                  )
-              }
-            ).catch(e => {
-              alert('Erro inesperado, tente novamente recarregando a página a ' + e);
-            })
+                      }
+                    ).catch(
+                      e => {
+                        alert("Erro inesperado, tente novamente recarregando a página " + e);
+                      }
+                    )
+                }
+              ).catch(e => {
+                alert('Erro inesperado, tente novamente recarregando a página a ' + e);
+              })
+          }
 
         ).catch(e => { alert('Erro ao cadastrar, tente novamente!') });
       function clear() {
         reset({
           nome: '',
-          data: '',
           marca: '',
           descricao: '',
           categoria: '0',
@@ -192,16 +193,6 @@ function Produto() {
               placeholder="Nome"
               ref={register}
             />
-            <div className="dataCategoriaEspecie">
-              <label className="data">Validade: </label>
-              <input
-                type="date"
-                name="data"
-                id="data"
-                placeholder="Validade"
-                ref={register}
-              />
-            </div>
             <input
               type="text"
               name="valor"

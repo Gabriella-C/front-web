@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Container, Content, Marked } from './styles';
 import axios from 'axios';
+import HeaderLateral from '../../components/HeaderLateral';
 
 function Detalhes() {
   const location = useLocation();
@@ -58,9 +59,8 @@ function Detalhes() {
       if (marked) {
         alert('este pedido já foi aceito');
       } else {
-        let data_aceito = `${data.getDate()}-${
-          data.getMonth() + 1
-        }-${data.getFullYear()}`;
+        let data_aceito = `${data.getDate()}-${data.getMonth() + 1
+          }-${data.getFullYear()}`;
         let hora_aceito = `${data.getHours()}:${data.getMinutes()}`;
         let data_hora_aceito = `${data_aceito} ${hora_aceito}`;
         axios
@@ -79,9 +79,8 @@ function Detalhes() {
       if (marked2) {
         alert('este pedido já está em separação');
       } else {
-        let data_separacao = `${data.getDate()}-${
-          data.getMonth() + 1
-        }-${data.getFullYear()}`;
+        let data_separacao = `${data.getDate()}-${data.getMonth() + 1
+          }-${data.getFullYear()}`;
         let hora_separacao = `${data.getHours()}:${data.getMinutes()}`;
         let data_hora_separacao = `${data_separacao} ${hora_separacao}`;
         axios
@@ -99,9 +98,8 @@ function Detalhes() {
       if (marked3) {
         alert('este pedido já saiu para entrega');
       } else {
-        let data_saiu = `${data.getDate()}-${
-          data.getMonth() + 1
-        }-${data.getFullYear()}`;
+        let data_saiu = `${data.getDate()}-${data.getMonth() + 1
+          }-${data.getFullYear()}`;
         let hora_saiu = `${data.getHours()}:${data.getMinutes()}`;
         let data_hora_saiu = `${data_saiu} ${hora_saiu}`;
         axios
@@ -139,103 +137,106 @@ function Detalhes() {
   }
 
   return (
-    <Container>
-      <Content>
-        {dados_usuario.map(
-          ({
-            idpedido,
-            nome_usuario,
-            celular,
-            celular2,
-            cep,
-            endereco,
-            bairro,
-            cidade,
-            estado,
-            numero,
-            complemento,
-            data_pedido,
-            data_previsao,
-            hora_previsao,
-          }) => (
-            <>
-              <div>
-                <strong>Pedido: #{idpedido}</strong>
-                <p>Horário do pedido {data_pedido}</p>
-                <div>
-                  <p>Previsão de Entrega</p>
-                  <p>Data: {data_previsao}</p>
-                  <p>Hora: {hora_previsao}</p>
-                </div>
-              </div>
+    <>
+      <HeaderLateral empresa={idempresa} />
+      <Container>
+        <Content>
+          {dados_usuario.map(
+            ({
+              idpedido,
+              nome_usuario,
+              celular,
+              celular2,
+              cep,
+              endereco,
+              bairro,
+              cidade,
+              estado,
+              numero,
+              complemento,
+              data_pedido,
+              data_previsao,
+              hora_previsao,
+            }) => (
+                <>
+                  <div>
+                    <strong>Pedido: #{idpedido}</strong>
+                    <p>Horário do pedido {data_pedido}</p>
+                    <div>
+                      <p>Previsão de Entrega</p>
+                      <p>Data: {data_previsao}</p>
+                      <p>Hora: {hora_previsao}</p>
+                    </div>
+                  </div>
 
-              <div>
-                <strong>Cliente: {nome_usuario}</strong>
-                <p>
-                  {' '}
+                  <div>
+                    <strong>Cliente: {nome_usuario}</strong>
+                    <p>
+                      {' '}
                   Número de telefone: {celular} | {celular2}
-                </p>
-              </div>
+                    </p>
+                  </div>
 
+                  <div>
+                    <strong>Endereço de Entrega</strong>
+                    <p>CEP: {cep}</p>
+                    <p>Endereço: {endereco}</p>
+                    <p>Bairro: {bairro}</p>
+                    <p>Cidade: {cidade}</p>
+                    <p>Estado: {estado}</p>
+                    <p>Número: {numero}</p>
+                    <p>Complemento: {complemento}</p>
+                  </div>
+                </>
+              )
+          )}
+
+          <div>
+            <strong> Itens do Pedido</strong>
+            {item_pedido.map(({ nome, qtd, descricao }) => (
               <div>
-                <strong>Endereço de Entrega</strong>
-                <p>CEP: {cep}</p>
-                <p>Endereço: {endereco}</p>
-                <p>Bairro: {bairro}</p>
-                <p>Cidade: {cidade}</p>
-                <p>Estado: {estado}</p>
-                <p>Número: {numero}</p>
-                <p>Complemento: {complemento}</p>
+                <p>{nome}</p>
+                <p>Quantidade: {qtd}</p>
+                <p>Descrição: {descricao}</p>
               </div>
-            </>
-          )
-        )}
+            ))}
+          </div>
 
-        <div>
-          <strong> Itens do Pedido</strong>
-          {item_pedido.map(({ nome, qtd, descricao }) => (
+          <div>
+            <strong> Status do Pedido</strong>
             <div>
-              <p>{nome}</p>
-              <p>Quantidade: {qtd}</p>
-              <p>Descrição: {descricao}</p>
+              <p>Aceitar Pedido</p>
+              <Marked
+                isMarked={marked}
+                onClick={() => orderStatus('Aceitar Pedido')}
+              />
             </div>
-          ))}
-        </div>
-
-        <div>
-          <strong> Status do Pedido</strong>
-          <div>
-            <p>Aceitar Pedido</p>
-            <Marked
-              isMarked={marked}
-              onClick={() => orderStatus('Aceitar Pedido')}
-            />
+            <div>
+              <p>Em Separação</p>
+              <Marked
+                isMarked={marked2}
+                onClick={() => orderStatus('Em Separação')}
+              />
+            </div>
+            <div>
+              <p>Saiu para entrega</p>
+              <Marked
+                isMarked={marked3}
+                onClick={() => orderStatus('Saiu para entrega')}
+              />
+            </div>
+            <div>
+              <p>Entregue</p>
+              <Marked
+                isMarked={marked4}
+                onClick={() => orderStatus('Entregue')}
+              />
+            </div>
           </div>
-          <div>
-            <p>Em Separação</p>
-            <Marked
-              isMarked={marked2}
-              onClick={() => orderStatus('Em Separação')}
-            />
-          </div>
-          <div>
-            <p>Saiu para entrega</p>
-            <Marked
-              isMarked={marked3}
-              onClick={() => orderStatus('Saiu para entrega')}
-            />
-          </div>
-          <div>
-            <p>Entregue</p>
-            <Marked
-              isMarked={marked4}
-              onClick={() => orderStatus('Entregue')}
-            />
-          </div>
-        </div>
-        <button onClick={finalizar}>Finalizar Pedido</button>
-      </Content>
-    </Container>
+          <button onClick={finalizar}>Finalizar Pedido</button>
+        </Content>
+      </Container>
+    </>
   );
 }
 

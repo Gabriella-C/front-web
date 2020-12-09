@@ -3,7 +3,8 @@ import { Container, ImageInput } from './styles';
 import { useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { moedaMask, soLetraMask, dataMask, numeroMask } from '../../Mascara/mask';
+import { moedaMask, soLetraMask, numeroMask } from '../../Mascara/mask';
+import HeaderLateral from '../../components/HeaderLateral';
 
 function EditProduto() {
   const location = useLocation();
@@ -12,7 +13,6 @@ function EditProduto() {
   const [empresa, setEmpresa] = useState('');
   const [idprod, setIdprod] = useState('');
   const [nome, setNome] = useState('');
-  const [data, setData] = useState('');
   const [valor, setValor] = useState('');
   const [marca, setMarca] = useState('');
   const [peso, setPeso] = useState('');
@@ -38,7 +38,6 @@ function EditProduto() {
     setEmpresa(location.state.empresa);
     setIdprod(location.state.idprod);
     setNome(location.state.nome);
-    setData(location.state.data);
     setValor(location.state.valor);
     setMarca(location.state.marca);
     setPeso(location.state.peso);
@@ -198,7 +197,7 @@ function EditProduto() {
       data.especie === '0'
     ) {
       alert(
-        'Somente os campos validade, descrição, marca e foto não são obrigatórios'
+        'Somente os campos descrição, marca e foto não são obrigatórios'
       );
     } else {
       console.log(statusLabel);
@@ -206,7 +205,6 @@ function EditProduto() {
         {
           "idprod": idprod,
           "nome": data.nome,
-          "validade": dataMask(data.data),
           "preco": numeroMask(data.valor),
           "empresa": empresa,
           "marca": data.marca,
@@ -255,7 +253,6 @@ function EditProduto() {
           especie: '0',
           raca: '0'
         });
-        setData('');
         setRaca([]);
         setValor('');
         setPeso('');
@@ -297,177 +294,166 @@ function EditProduto() {
   }
 
   return (
-    <Container>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <h2>Atualização de Produto</h2>
-        <div>
-          <ImageInput>
-            <label htmlFor="product">
-              <img
-                name="img"
-                src={
-                  preview ||
-                  'https://madeirasgasometro.vteximg.com.br/arquivos/ids/168849-1000-1000/mdf-cinza-sagrado-essencial-imagem-01.jpg?v=636655430222730000'
-                }
-                alt=""
-                ref={register}
-              />
-              <input
-                type="file"
-                id="product"
-                name="product"
-                accept="image/*"
-                onChange={handleChange}
-                ref={register}
-              />
-            </label>
-          </ImageInput>
+    <>
+      <HeaderLateral empresa={empresa} />
+      <Container>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <h2>Atualização de Produto</h2>
+          <div>
+            <ImageInput>
+              <label htmlFor="product">
+                <img
+                  name="img"
+                  src={
+                    preview ||
+                    'https://madeirasgasometro.vteximg.com.br/arquivos/ids/168849-1000-1000/mdf-cinza-sagrado-essencial-imagem-01.jpg?v=636655430222730000'
+                  }
+                  alt=""
+                  ref={register}
+                />
+                <input
+                  type="file"
+                  id="product"
+                  name="product"
+                  accept="image/*"
+                  onChange={handleChange}
+                  ref={register}
+                />
+              </label>
+            </ImageInput>
 
-          <div className='status'>
-            <div className='statusLabel'>
-              <label>Status: </label>
-              <label>{statusLabel}</label>
+            <div className='status'>
+              <div className='statusLabel'>
+                <label>Status: </label>
+                <label>{statusLabel}</label>
+              </div>
+              <button type='button' onClick={alteraStatus}>Mudar status</button>
             </div>
-            <button type='button' onClick={alteraStatus}>Mudar status</button>
           </div>
-        </div>
-        <input
-          type="text"
-          name="nome"
-          id="nome"
-          placeholder="Nome"
-          ref={register}
-          value={nome}
-          onChange={e => {
-            setNome(e.target.value);
-          }}
-        />
-        <div>
-          <h5 className="data">Validade: </h5>
           <input
-            type="date"
-            name="data"
-            id="data"
-            placeholder="Validade"
+            type="text"
+            name="nome"
+            id="nome"
+            placeholder="Nome"
             ref={register}
-            value={data}
+            value={nome}
             onChange={e => {
-              setData(e.target.value);
+              setNome(e.target.value);
             }}
           />
-        </div>
-        <input
-          type="text"
-          name="valor"
-          id="valor"
-          placeholder="Valor"
-          ref={register}
-          value={valor}
-          onChange={e => {
-            setValor(moedaMask(e.target.value));
-          }}
-        />
-        <input
-          type="text"
-          name="marca"
-          id="marca"
-          placeholder="Marca"
-          ref={register}
-          value={marca}
-          onChange={e => {
-            setMarca(e.target.value)
-          }}
-        />
-        <input
-          type="text"
-          name="peso"
-          id="peso"
-          placeholder="Peso"
-          ref={register}
-          value={peso}
-          onChange={e => {
-            setPeso(moedaMask(e.target.value));
-          }}
-        />
-        <input
-          type="text"
-          name="unidMed"
-          id="unidMed"
-          placeholder="Unidade de Medida"
-          maxLength="2"
-          ref={register}
-          value={um}
-          onChange={e => {
-            setUm(soLetraMask(e.target.value));
-          }}
-        />
-        <textarea
-          type="text"
-          name="descricao"
-          id="descricao"
-          placeholder="Descrição de Produto"
-          ref={register}
-          value={desc}
-          onChange={e => {
-            setDesc(e.target.value);
-          }}
-        />
-        <div className="dataCategoriaEspecie">
-          <label>Categoria: </label>
-          <select name="categoria" id="categoria" ref={register}>
-            <option value='0' key='0'>
-              Escolher
-            </option>
-            <option value={dadoscatAtu.categoria_id_cat_prod} key={dadoscatAtu.categoria_id_cat_prod} disabled={disable} hidden={hide} selected={select}>
-              {dadoscatAtu.nome_categoria}
-            </option>
-            {categoria.map(({ idcategoria, nome_categoria }) => (
-              <option value={idcategoria} key={idcategoria}>
-                {nome_categoria}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="dataCategoriaEspecie">
-          <label>Espécie: </label>
-          <select
-            name="especie"
-            id="especie"
+          <input
+            type="text"
+            name="valor"
+            id="valor"
+            placeholder="Valor"
             ref={register}
-            onChange={handleSpecie}
-          >
-            <option value='0' key='0'>
-              Escolher
+            value={valor}
+            onChange={e => {
+              setValor(moedaMask(e.target.value));
+            }}
+          />
+          <input
+            type="text"
+            name="marca"
+            id="marca"
+            placeholder="Marca"
+            ref={register}
+            value={marca}
+            onChange={e => {
+              setMarca(e.target.value)
+            }}
+          />
+          <input
+            type="text"
+            name="peso"
+            id="peso"
+            placeholder="Peso"
+            ref={register}
+            value={peso}
+            onChange={e => {
+              setPeso(moedaMask(e.target.value));
+            }}
+          />
+          <input
+            type="text"
+            name="unidMed"
+            id="unidMed"
+            placeholder="Unidade de Medida"
+            maxLength="2"
+            ref={register}
+            value={um}
+            onChange={e => {
+              setUm(soLetraMask(e.target.value));
+            }}
+          />
+          <textarea
+            type="text"
+            name="descricao"
+            id="descricao"
+            placeholder="Descrição de Produto"
+            ref={register}
+            value={desc}
+            onChange={e => {
+              setDesc(e.target.value);
+            }}
+          />
+          <div className="dataCategoriaEspecie">
+            <label>Categoria: </label>
+            <select name="categoria" id="categoria" ref={register}>
+              <option value='0' key='0'>
+                Escolher
             </option>
-            <option value={dadoscatAtu.especie_id_raca} key={dadoscatAtu.especie_id_raca} disabled={disable} hidden={hide} selected={select}>
-              {dadoscatAtu.nome_especie}
-            </option>
-            {especie.map(({ idespecie, nome_especie }) => (
-              <option value={idespecie} key={idespecie}>
-                {nome_especie}
+              <option value={dadoscatAtu.categoria_id_cat_prod} key={dadoscatAtu.categoria_id_cat_prod} disabled={disable} hidden={hide} selected={select}>
+                {dadoscatAtu.nome_categoria}
               </option>
-            ))}
-          </select>
-        </div>
-        <div className="dataCategoriaEspecie">
-          <label>Raça: </label>
-          <select name="raca" id="raca" ref={register}>
-            <option value='0' key='0'>
-              Escolher
+              {categoria.map(({ idcategoria, nome_categoria }) => (
+                <option value={idcategoria} key={idcategoria}>
+                  {nome_categoria}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="dataCategoriaEspecie">
+            <label>Espécie: </label>
+            <select
+              name="especie"
+              id="especie"
+              ref={register}
+              onChange={handleSpecie}
+            >
+              <option value='0' key='0'>
+                Escolher
             </option>
-            <option value={dadoscatAtu.raca_id_cat_prod} key={dadoscatAtu.raca_id_cat_prod} disabled={disable} hidden={hide} selected={select}>
-              {dadoscatAtu.nome_raca}
-            </option>
-            {raca.map(({ idraca, nome_raca }) => (
-              <option value={idraca} key={idraca}>
-                {nome_raca}
+              <option value={dadoscatAtu.especie_id_raca} key={dadoscatAtu.especie_id_raca} disabled={disable} hidden={hide} selected={select}>
+                {dadoscatAtu.nome_especie}
               </option>
-            ))}
-          </select>
-        </div>
-        <button>Atualizar</button>
-      </form>
-    </Container>
+              {especie.map(({ idespecie, nome_especie }) => (
+                <option value={idespecie} key={idespecie}>
+                  {nome_especie}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="dataCategoriaEspecie">
+            <label>Raça: </label>
+            <select name="raca" id="raca" ref={register}>
+              <option value='0' key='0'>
+                Escolher
+            </option>
+              <option value={dadoscatAtu.raca_id_cat_prod} key={dadoscatAtu.raca_id_cat_prod} disabled={disable} hidden={hide} selected={select}>
+                {dadoscatAtu.nome_raca}
+              </option>
+              {raca.map(({ idraca, nome_raca }) => (
+                <option value={idraca} key={idraca}>
+                  {nome_raca}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button>Atualizar</button>
+        </form>
+      </Container>
+    </>
   );
 }
 
