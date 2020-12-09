@@ -29,9 +29,9 @@ export const cepMask = value => {
 export const celularMask = value => {
     return value
         .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
-        .replace(/^(\d{2})(\d)/g, "($1) $2") //Coloca parênteses em volta dos dois primeiros dígitos
+        .replace(/^(\d{2})(\d)/g, "($1)$2") //Coloca parênteses em volta dos dois primeiros dígitos
         .replace(/(\d{1})(\d{4})/, " $1 $2")    //Coloca espaço entre o primeiro dígito e o segundo dígito
-        .replace(/(\d{4})(\d{4})/, " $1-$2")    //Coloca hífen entre o quarto e o quinto dígito
+        .replace(/(\d{4})(\d{4})/, "$1-$2")    //Coloca hífen entre o quarto e o quinto dígito
         .replace(/(-\d{4})\d+?$/, '$1')    //depois dos ultimos 4 dígitos nada mais é inserido
 }
 

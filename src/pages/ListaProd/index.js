@@ -41,17 +41,12 @@ function ListaProd() {
               <ListItem isMarked={isMarked} id={p.idproduto} key={p.idproduto}>
                 <li>
                   <strong>Nome: {p.nome}</strong>
-                  <p> Validade: {p.validadedata}</p>
                   <p> Valor: {valor}</p>
                   <p> Status: {p.status}</p>
                 </li>
                 <div>
                   <button onClick={
                     () => {
-                      let dia = p.validadedata.substr(0, 2);
-                      let mes = p.validadedata.substr(3, 2);
-                      let ano = p.validadedata.substr(6, 4);
-                      let data = ano + '-' + mes + '-' + dia;
                       let status = '';
                       if (p.status === 'disponível') {
                         status = true;
@@ -64,7 +59,6 @@ function ListaProd() {
                           empresa: idempresa,
                           idprod: p.idproduto,
                           nome: p.nome,
-                          data: data,
                           valor: valor,
                           marca: p.marca,
                           peso: peso,
@@ -79,9 +73,6 @@ function ListaProd() {
                     }
                   }>
                     <BiPencil size={20} color="#2dc7ff" />
-                  </button>
-                  <button onClick={() => history.push({ pathname: '/EditProduto', state: { idprod: p.idproduto } })}>
-                    <BiTrash size={20} color="#ec524b" />
                   </button>
                 </div>
               </ListItem>
