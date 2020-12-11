@@ -4,6 +4,7 @@ import HeaderLateral from '../../components/HeaderLateral';
 import { formatPrice } from '../../util/format';
 import { Container, ListaPedido, ComponentePedido } from './styles';
 import axios from 'axios';
+import { moedaMask } from '../../Mascara/mask';
 
 function Pedido() {
   const location = useLocation();
@@ -35,7 +36,7 @@ function Pedido() {
                 <div>
                   <strong>{'#' + idpedido}</strong>
                 </div>
-                <h5>Total: {formatPrice(total)}</h5>
+                <h5>Total: {moedaMask(total)}</h5>
                 <h6>{(total = 0)}</h6>
                 <button onClick={() => {
                   history.push({
