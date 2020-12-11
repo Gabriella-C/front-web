@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { Container, Content, Marked } from './styles';
 import axios from 'axios';
 import HeaderLateral from '../../components/HeaderLateral';
+import { celularMask, cepMask } from '../../Mascara/mask';
 
 function Detalhes() {
   const location = useLocation();
@@ -173,13 +174,13 @@ function Detalhes() {
                     <strong>Cliente: {nome_usuario}</strong>
                     <p>
                       {' '}
-                  Número de telefone: {celular} | {celular2}
+                  Número de telefone: {celularMask(celular)} | {celularMask(celular2)}
                     </p>
                   </div>
 
                   <div>
                     <strong>Endereço de Entrega</strong>
-                    <p>CEP: {cep}</p>
+                    <p>CEP: {cepMask(cep)}</p>
                     <p>Endereço: {endereco}</p>
                     <p>Bairro: {bairro}</p>
                     <p>Cidade: {cidade}</p>

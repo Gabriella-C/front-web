@@ -98,11 +98,12 @@ function Produto() {
           "um": data.unidMed
         }).then(
           res => {
-            console.log(res);
             axios.post('http://localhost:3333/Last_Product', { 'id': empresa })
               .then(
                 res => {
                   const ultimoProdid = res.data[0].max;
+                  console.log(ultimoProdid);
+                  console.log(empresa);
                   axios.post('http://localhost:3333/Category_Create',
                     {
                       "categoria": data.categoria,
