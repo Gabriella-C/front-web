@@ -391,6 +391,7 @@ function EditProduto() {
             name="descricao"
             id="descricao"
             placeholder="Descrição de Produto"
+            maxLength="255"
             ref={register}
             value={desc}
             onChange={e => {

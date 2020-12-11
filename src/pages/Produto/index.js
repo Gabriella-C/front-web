@@ -243,6 +243,7 @@ function Produto() {
               id="descricao"
               placeholder="Descrição de Produto"
               ref={register}
+              maxLength="255"
             />
             <div className="dataCategoriaEspecie">
               <label>Categoria: </label>
