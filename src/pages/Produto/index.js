@@ -24,6 +24,16 @@ function Produto() {
     let id = location.state.id;
     setEmpresa(id);
 
+    axios.post('http://localhost:3333/Last_Product', { 'id': id })
+      .then(
+        res => {
+          if (res !== []) {
+            setUltimoProd(res.data[0].max);
+          } else {
+            setUltimoProd('temp');
+          }
+        });
+
     axios
       .get('http://localhost:3333/Category')
       .then((res) => {
@@ -45,7 +55,7 @@ function Produto() {
 
   async function handleChange(e) {
     const data = new FormData();
-    const idprod = 'temp';
+    const idprod = ultimoProd + 1;
     data.append('temp', e.target.files[0]);
     const response = await axios.post('http://localhost:3333/ProdTempproduto' + idprod + '_' + empresa, data);
     const { url, img } = response.data;
